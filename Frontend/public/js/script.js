@@ -88,6 +88,7 @@ function signup(){
 
 function Logout() {
   localStorage.removeItem('token')
+  localStorage.removeItem('user')
   window.location.replace('./login.html')
 }
 
