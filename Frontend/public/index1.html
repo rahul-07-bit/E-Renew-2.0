@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>E-Waste Facility Locator</title>
+  <link rel="stylesheet" href="./css/style2.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+  <script>history.scrollRestoration = "manual";</script>
+</head>
+<body>
+
+<!-- Navbar -->
+<div id="nav-main">
+<nav id="nav">
+  <div class="menu-bar">
+    <div class="menu-tabs">
+      <li><a href="./index.html"><i class="fa-solid fa-house"></i><span>Home</span></a></li>
+      <li><a href="./about.html"><i class="fa-solid fa-book-open"></i><span>About</span></a></li>
+      <li><a href="./services.html"><i class="fa-solid fa-screwdriver-wrench"></i><span>Services</span></a></li>
+      <li><a href="./faq.html"><i class="fa-solid fa-circle-question"></i><span>FAQ</span></a></li>
+      <li><a href="./team.html"><i class="fa-solid fa-people-group"></i><span>Team</span></a></li>
+      <li><a href="index1.html"><i class="fa-solid fa-store"></i><span>Sale</span></a></li>
+    </div>
+  </div>
+</nav>
+<div id="nav-down" class="nav-down-2"></div>
+<div id="nav-down" class="nav-down-1"></div>
+</div>
+
+<!-- Top Header -->
+<div id="top">
+  <a href="./index.html"><img src="./assets/image/Logo.jpg"> <img src="./assets/image/WhatsApp Image 2024-11-21 at 00.52.34_48c44e4e - Copy.jpg" alt=""></a>
+  <div class="top-login">
+    <ul>
+      <li><a href="./login.html" id="login-btn">Login</a></li>
+      <li><a href="index.html" onclick="register()" id="register-btn">Register</a></li>
+      <li><a href="#" onclick="Logout()" id="logout-btn">Logout</a></li>
+    </ul>
+  </div>
+</div>
+
+<!-- Hero Section -->
+<section id="hero">
+  <div class="hero-text">
+    <p>Submit Your E-Waste for Recycling</p>
+    <h1>Recycle Electronics Responsibly</h1>
+    <p>Get a fair quote for your unused or damaged devices.</p>
+  </div>
+</section>
+
+<!-- Form Section -->
+<section id="form-section">
+  <div class="container">
+    <form id="recycle-form" class="form-box">
+      <h2>Enter Electronic Item Details</h2>
+
+      <!-- Item Type -->
+      <div class="form-group">
+        <label for="item-type">Type of Item:</label>
+        <select id="item-type" name="item-type" required>
+          <option value="" disabled selected>Select an item</option>
+          <option value="Smartphone">Smartphone</option>
+          <option value="Tablet">Tablet</option>
+          <option value="Laptop">Laptop</option>
+          <option value="Desktop">Desktop</option>
+          <option value="Refrigerator">Refrigerator</option>
+          <option value="Washing Machine">Washing Machine</option>
+          <option value="Microwave">Microwave</option>
+          <option value="Air Conditioner">Air Conditioner</option>
+          <option value="TV">TV</option>
+          <option value="Printer">Printer</option>
+          <option value="Gaming Console">Gaming Console</option>
+          <option value="Router">Router</option>
+          <option value="Smartwatch">Smartwatch</option>
+          <option value="Digital Camera">Digital Camera</option>
+          <option value="Electric Kettle">Electric Kettle</option>
+          <option value="Blender">Blender</option>
+          <option value="Toaster">Toaster</option>
+          <option value="Other">Other</option>
+        </select>
+      </div>
+
+      <!-- Condition -->
+      <div class="form-group">
+        <label for="condition">Condition:</label>
+        <select id="condition" name="condition" required>
+          <option value="Working">Working</option>
+          <option value="Damaged">Damaged</option>
+          <option value="Non-Functional">Non-Functional</option>
+        </select>
+      </div>
+
+      <!-- Material Composition -->
+      <div class="form-group">
+        <label for="materials">Material Composition (select all that apply):</label>
+        <div>
+          <input type="checkbox" id="gold" name="materials" value="Gold">
+          <label for="gold">Gold</label>
+        </div>
+        <div>
+          <input type="checkbox" id="silver" name="materials" value="Silver">
+          <label for="silver">Silver</label>
+        </div>
+        <div>
+          <input type="checkbox" id="copper" name="materials" value="Copper">
+          <label for="copper">Copper</label>
+        </div>
+        <div>
+          <input type="checkbox" id="plastic" name="materials" value="Plastic">
+          <label for="plastic">Plastic</label>
+        </div>
+      </div>
+
+      <!-- Weight -->
+      <div class="form-group">
+        <label for="weight">Weight (kg):</label>
+        <input type="number" id="weight" name="weight" step="0.1" required>
+      </div>
+
+      <!-- Calculate Button -->
+      <button type="button" id="calculate-btn">Calculate Price</button>
+
+      <!-- Output Price -->
+      <div id="price-output">
+        <p>Estimated Price: <span id="price-value">₹0</span></p>
+      </div>
+
+      <!-- Submit Button -->
+      <button type="submit">Submit</button>
+
+      <!-- ✅ Added section for record display -->
+      <div id="storage-info" style="margin-top:15px; font-weight:bold; color:green;"></div>
+
+      <button id="view-data" type="button" 
+        style="margin-top:10px; background-color:#007bff; color:white; padding:10px 20px; border:none; border-radius:5px;">
+        View Stored Records
+      </button>
+
+      <div id="stored-data" 
+        style="margin-top:15px; background:#f8f8f8; border-radius:8px; padding:10px; font-weight:500; color:#333;">
+      </div>
+
+    </form>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer>
+  <p>Recycle responsibly. Together, we can make a difference!</p>
+</footer>
+
+<script src="./js/script2.js"></script>
+<script src="./js/javascript.js"></script>
+</body>
+</html>

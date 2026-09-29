@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Login &mdash; E-RENEW</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@600;800&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet" />
+<style>
+  :root{
+    --deep:#0f3b33; --moss:#1f5c4a; --mint:#dfece5; --paper:#f3f6f4;
+    --ink:#12231f; --muted:#5b6f68; --line:#cfdcd5; --signal:#f2b705; --error:#b3261e;
+    --head:'Bricolage Grotesque','Segoe UI',system-ui,sans-serif;
+    --body:'DM Sans','Segoe UI',system-ui,sans-serif;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{height:100%}
+  body{font-family:var(--body);color:var(--ink);background:var(--paper);display:grid;grid-template-columns:1.05fr 1fr;min-height:100vh}
+  a{color:var(--moss)}
+  :focus-visible{outline:3px solid var(--signal);outline-offset:2px}
+
+  /* Left story panel */
+  .story{background:var(--deep);color:#fff;padding:48px 56px;display:flex;flex-direction:column;justify-content:space-between;position:relative;overflow:hidden}
+  .story svg.trace{position:absolute;inset:0;width:100%;height:100%;opacity:.35;pointer-events:none}
+  .brand{font-family:var(--head);font-weight:800;font-size:1.4rem;letter-spacing:.5px;position:relative}
+  .brand span{color:var(--signal)}
+  .story h1{font-family:var(--head);font-weight:800;font-size:clamp(2.2rem,4.2vw,3.6rem);line-height:1.05;max-width:12ch;position:relative}
+  .story p{margin-top:18px;max-width:42ch;color:#c6dbd2;line-height:1.6;position:relative}
+  .points{list-style:none;position:relative;display:grid;gap:10px;color:#e6f1ec;font-size:.95rem}
+  .points li::before{content:"";display:inline-block;width:10px;height:10px;background:var(--signal);border-radius:2px;margin-right:12px}
+
+  /* Right form panel */
+  .panel{display:flex;align-items:center;justify-content:center;padding:32px}
+  .card{width:100%;max-width:400px}
+  .state{display:none}
+  .state.active{display:block;animation:in .25s ease}
+  @keyframes in{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+  h2{font-family:var(--head);font-size:1.9rem;font-weight:800;margin-bottom:8px}
+  .sub{color:var(--muted);line-height:1.5;margin-bottom:26px}
+  .sub b{color:var(--ink)}
+  label{display:block;font-weight:700;font-size:.9rem;margin-bottom:8px}
+  input[type=email]{width:100%;padding:14px 16px;border:1.5px solid var(--line);border-radius:10px;font:inherit;background:#fff}
+  input[type=email]:focus{border-color:var(--moss);outline:none;box-shadow:0 0 0 3px rgba(31,92,74,.18)}
+  .err{color:var(--error);font-size:.88rem;min-height:20px;margin-top:8px}
+  .btn{width:100%;padding:14px;border:0;border-radius:10px;font:inherit;font-weight:700;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:10px}
+  .btn-primary{background:var(--moss);color:#fff;margin-top:6px}
+  .btn-primary:hover{background:var(--deep)}
+  .btn[disabled]{opacity:.6;cursor:not-allowed}
+  .btn-google{background:#fff;border:1.5px solid var(--line);color:var(--ink)}
+  .btn-google:hover{background:var(--mint)}
+  .btn-google svg{width:20px;height:20px}
+  .or{display:flex;align-items:center;gap:12px;color:var(--muted);font-size:.85rem;margin:20px 0}
+  .or::before,.or::after{content:"";flex:1;height:1px;background:var(--line)}
+  .otp{display:grid;grid-template-columns:repeat(6,1fr);gap:10px;margin-bottom:6px}
+  .otp input{width:100%;aspect-ratio:1;text-align:center;font-size:1.5rem;font-weight:700;border:1.5px solid var(--line);border-radius:10px;background:#fff;font-family:var(--body)}
+  .otp input:focus{border-color:var(--moss);outline:none;box-shadow:0 0 0 3px rgba(31,92,74,.18)}
+  .links{display:flex;justify-content:space-between;align-items:center;margin-top:18px;font-size:.9rem;color:var(--muted)}
+  .link-btn{background:none;border:0;color:var(--moss);font:inherit;font-weight:700;cursor:pointer;padding:0}
+  .link-btn[disabled]{color:var(--muted);cursor:default}
+  .spin{width:18px;height:18px;border:3px solid rgba(255,255,255,.4);border-top-color:#fff;border-radius:50%;animation:r .7s linear infinite;display:none}
+  .btn.loading .spin{display:inline-block}
+  @keyframes r{to{transform:rotate(360deg)}}
+  .ok{text-align:center}
+  .tick{width:72px;height:72px;border-radius:50%;background:var(--mint);color:var(--moss);display:grid;place-items:center;margin:0 auto 18px;font-size:2rem;font-weight:800}
+  .foot{margin-top:24px;text-align:center;font-size:.9rem;color:var(--muted)}
+  .cfg{background:#fff3cd;border:1px solid #f0d67a;padding:10px 12px;border-radius:8px;font-size:.82rem;margin-bottom:18px;display:none}
+
+  @media (max-width:860px){
+    body{grid-template-columns:1fr}
+    .story{padding:28px 24px;gap:24px}
+    .story h1{font-size:2rem;max-width:none}
+    .points{display:none}
+  }
+  @media (prefers-reduced-motion:reduce){.state.active{animation:none}.spin{animation-duration:2s}}
+</style>
+</head>
+<body>
+
+<aside class="story">
+  <svg class="trace" viewBox="0 0 600 800" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+    <g fill="none" stroke="#5fa58f" stroke-width="2">
+      <path d="M-20 620 H140 L200 560 H360 L420 620 H620"/>
+      <path d="M-20 700 H80 L140 760 H300 L360 700 H620"/>
+      <path d="M300 -20 V120 L360 180 V320"/>
+      <path d="M420 -20 V80 L480 140 V240 L540 300 H620"/>
+    </g>
+    <g fill="#f2b705">
+      <circle cx="140" cy="620" r="5"/><circle cx="360" cy="560" r="5"/>
+      <circle cx="360" cy="320" r="5"/><circle cx="540" cy="300" r="5"/>
+    </g>
+  </svg>
+  <div class="brand">E-<span>RENEW</span></div>
+  <div>
+    <h1>Give your old electronics a second life.</h1>
+    <p>Find verified e-waste facilities near you, register your device, and track it from drop-off to recycling.</p>
+  </div>
+  <ul class="points">
+    <li>Verified recycling facilities</li>
+    <li>Register and track your devices</li>
+    <li>Earn rewards for recycling</li>
+  </ul>
+</aside>
+
+<main class="panel">
+  <div class="card">
+    <div class="cfg" id="cfg-warn">Add your Supabase URL and anon key in the script at the bottom of this file.</div>
+
+    <!-- 1. Email -->
+    <section class="state active" id="s-email">
+      <h2>Welcome back</h2>
+      <p class="sub">Enter your email and we'll send you a 6-digit code. No password needed.</p>
+      <form id="email-form" novalidate>
+        <label for="email">Email address</label>
+        <input type="email" id="email" autocomplete="email" placeholder="you@example.com" required />
+        <div class="err" id="email-err" role="alert"></div>
+        <button class="btn btn-primary" id="send-btn" type="submit"><span class="spin"></span><span>Send code</span></button>
+      </form>
+      <div class="or">or</div>
+      <button class="btn btn-google" id="google-btn" type="button">
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.06 5.06 0 0 1-2.2 3.32v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.1z" fill="#4285F4"/>
+          <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/>
+          <path d="M5.84 14.09a6.6 6.6 0 0 1 0-4.18V7.07H2.18a11 11 0 0 0 0 9.86l3.66-2.84z" fill="#FBBC05"/>
+          <path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84C6.71 7.31 9.14 5.38 12 5.38z" fill="#EA4335"/>
+        </svg>
+        Continue with Google
+      </button>
+      <p class="foot">New here? Just enter your email. Your account is created on first sign-in.</p>
+    </section>
+
+    <!-- 2. OTP -->
+    <section class="state" id="s-otp">
+      <h2>Check your email</h2>
+      <p class="sub">We sent a 6-digit code to <b id="show-email"></b>.</p>
+      <div class="otp" id="otp">
+        <input inputmode="numeric" maxlength="1" autocomplete="one-time-code" aria-label="Digit 1" />
+        <input inputmode="numeric" maxlength="1" aria-label="Digit 2" />
+        <input inputmode="numeric" maxlength="1" aria-label="Digit 3" />
+        <input inputmode="numeric" maxlength="1" aria-label="Digit 4" />
+        <input inputmode="numeric" maxlength="1" aria-label="Digit 5" />
+        <input inputmode="numeric" maxlength="1" aria-label="Digit 6" />
+      </div>
+      <div class="err" id="otp-err" role="alert"></div>
+      <button class="btn btn-primary" id="verify-btn" type="button"><span class="spin"></span><span>Verify code</span></button>
+      <div class="links">
+        <span>No code? <button class="link-btn" id="resend-btn" type="button" disabled>Resend in <span id="timer">30</span>s</button></span>
+        <button class="link-btn" id="change-btn" type="button">Change email</button>
+      </div>
+    </section>
+
+    <!-- 3. Success -->
+    <section class="state" id="s-ok">
+      <div class="ok">
+        <div class="tick">&#10003;</div>
+        <h2>You're signed in</h2>
+        <p class="sub">Taking you to E-RENEW...</p>
+      </div>
+    </section>
+  </div>
+</main>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+  // ====== 1. PUT YOUR SUPABASE DETAILS HERE (Supabase > Project Settings > API) ======
+  const SUPABASE_URL = 'https://YOUR-PROJECT-ID.supabase.co';
+  const SUPABASE_ANON_KEY = 'YOUR-ANON-PUBLIC-KEY';
+  const AFTER_LOGIN_PAGE = './index.html';
+  // =====================================================================================
+
+  const configured = !SUPABASE_URL.includes('YOUR-PROJECT-ID');
+  if (!configured) document.getElementById('cfg-warn').style.display = 'block';
+  const supabaseClient = configured ? supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY) : null;
+
+  const $ = id => document.getElementById(id);
+  const states = ['s-email','s-otp','s-ok'];
+  const show = id => states.forEach(s => $(s).classList.toggle('active', s === id));
+  const busy = (btn, on) => { btn.classList.toggle('loading', on); btn.disabled = on; };
+  let email = '', timerId = null;
+
+  // Already signed in? Skip the login page.
+  if (supabaseClient) {
+    supabaseClient.auth.getSession().then(({ data }) => {
+      if (data.session) window.location.replace(AFTER_LOGIN_PAGE);
+    });
+  }
+
+  // ----- Step 1: send code -----
+  $('email-form').addEventListener('submit', async e => {
+    e.preventDefault();
+    const val = $('email').value.trim();
+    $('email-err').textContent = '';
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(val)) { $('email-err').textContent = 'Enter a valid email address.'; return; }
+    if (!supabaseClient) { $('email-err').textContent = 'Supabase is not configured yet.'; return; }
+    busy($('send-btn'), true);
+    const { error } = await supabaseClient.auth.signInWithOtp({ email: val, options: { shouldCreateUser: true } });
+    busy($('send-btn'), false);
+    if (error) { $('email-err').textContent = error.message; return; }
+    email = val; $('show-email').textContent = email;
+    show('s-otp'); startTimer(); $('otp').children[0].focus();
+  });
+
+  // ----- OTP boxes: type, backspace, paste -----
+  const boxes = [...$('otp').children];
+  boxes.forEach((box, i) => {
+    box.addEventListener('input', () => {
+      box.value = box.value.replace(/\D/g, '').slice(-1);
+      if (box.value && i < 5) boxes[i + 1].focus();
+      if (boxes.every(b => b.value)) verify();
+    });
+    box.addEventListener('keydown', e => {
+      if (e.key === 'Backspace' && !box.value && i > 0) boxes[i - 1].focus();
+    });
+    box.addEventListener('paste', e => {
+      e.preventDefault();
+      const d = (e.clipboardData.getData('text') || '').replace(/\D/g, '').slice(0, 6);
+      d.split('').forEach((c, k) => boxes[k].value = c);
+      (boxes[Math.min(d.length, 5)]).focus();
+      if (d.length === 6) verify();
+    });
+  });
+
+  // ----- Step 2: verify code -----
+  $('verify-btn').addEventListener('click', verify);
+  async function verify() {
+    const token = boxes.map(b => b.value).join('');
+    $('otp-err').textContent = '';
+    if (token.length < 6) { $('otp-err').textContent = 'Enter all 6 digits.'; return; }
+    busy($('verify-btn'), true);
+    const { error } = await supabaseClient.auth.verifyOtp({ email, token, type: 'email' });
+    busy($('verify-btn'), false);
+    if (error) {
+      $('otp-err').textContent = 'That code is wrong or has expired. Check it or request a new one.';
+      boxes.forEach(b => b.value = ''); boxes[0].focus(); return;
+    }
+    show('s-ok');
+    setTimeout(() => window.location.replace(AFTER_LOGIN_PAGE), 1000);
+  }
+
+  // ----- Resend timer -----
+  function startTimer() {
+    let s = 30; clearInterval(timerId);
+    $('resend-btn').disabled = true;
+    $('resend-btn').innerHTML = 'Resend in <span id="timer">30</span>s';
+    timerId = setInterval(() => {
+      s--;
+      if (s <= 0) { clearInterval(timerId); $('resend-btn').disabled = false; $('resend-btn').textContent = 'Resend code'; }
+      else $('timer').textContent = s;
+    }, 1000);
+  }
+  $('resend-btn').addEventListener('click', async () => {
+    const { error } = await supabaseClient.auth.signInWithOtp({ email });
+    $('otp-err').textContent = error ? error.message : '';
+    if (!error) startTimer();
+  });
+  $('change-btn').addEventListener('click', () => { clearInterval(timerId); boxes.forEach(b => b.value = ''); show('s-email'); $('email').focus(); });
+
+  // ----- Google sign-in -----
+  $('google-btn').addEventListener('click', async () => {
+    if (!supabaseClient) { $('email-err').textContent = 'Supabase is not configured yet.'; return; }
+    const { error } = await supabaseClient.auth.signInWithOAuth({
+      provider: 'google',
+      options: { redirectTo: window.location.origin + '/index.html' }
+    });
+    if (error) $('email-err').textContent = error.message;
+  });
+</script>
+</body>
+</html>

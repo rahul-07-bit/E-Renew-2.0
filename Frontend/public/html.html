@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Shopkeeper Dashboard</title>
+  <link rel="stylesheet" href="./css/csshtml.css">
+</head>
+<body>
+  <!-- Navbar -->
+  <nav id="nav">
+    <div class="menu-bar">
+      <ul class="menu-tabs">
+        <li><a href="./index.html"><i class="fa-solid fa-house"></i> Home</a></li>
+        <li><a href="./about.html"><i class="fa-solid fa-book-open"></i> About</a></li>
+        <li><a href="./services.html"><i class="fa-solid fa-screwdriver-wrench"></i> Services</a></li>
+        <li><a href="./faq.html"><i class="fa-solid fa-circle-question"></i> FAQ</a></li>
+        <li><a href="./team.html"><i class="fa-solid fa-people-group"></i> Team</a></li>
+      </ul>
+    </div>
+  </nav>
+<!-- Navbar -->
+<div id="top">
+  <a href="./index.html"><img src="./assets/image/Logo.jpg"> <img src="image/" alt=""></a>
+  <div class="top-login">
+    <ul>
+      <li><a href="./login.html" id="login-btn">Login</a></li>
+      <li><a href="index.html" onclick="register()" id="register-btn">Register</a></li>
+      <li><a href="#" onclick="Logout()" id="logout-btn">Logout</a></li>
+    </ul>
+  </div>
+</div>
+<!-- Navbar -->
+
+  <!-- Header Section -->
+  <header>
+    <h1>Shopkeeper Dashboard</h1>
+    <p>Manage items submitted for recycling.</p>
+  </header>
+
+  <!-- Main Content -->
+  <main>
+    <!-- Form Section -->
+    <!-- <h2>Submit an Item</h2> -->
+    <form id="recycle-form" class="form-box">
+        Rahul Mourya
+    </form>
+
+    <!-- Table Section -->
+    <h2>Items for Recycling</h2>
+    <table id="items-table">
+      <thead>
+        <tr>
+          <th>Item Type</th>
+          <th>Condition</th>
+          <th>Weight (kg)</th>
+          <th>Materials</th>
+          <th>Estimated Price</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- Dynamic rows will be added here -->
+      </tbody>
+    </table>
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <p>Recycle responsibly. Together, we can make a difference!</p>
+  </footer>
+
+  <script src="./js/javascript.js"></script>
+</body>
+</html>

@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>E-Waste Facility Locator</title>
+    <link rel="stylesheet" href="./css/style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+    />
+    <script>history.scrollRestoration = "manual"</script>
+  </head>
+  <body>
+
+<!-- Navbar -->
+<div id="nav-main">
+  <nav id="nav">
+    <div class="menu-bar">
+      <div class="menu-tabs">
+        <li><a href="./index.html"><i class="fa-solid fa-house"></i><span>Home</span></a></li>
+        <li><a href="./about.html"><i class="fa-solid fa-book-open"></i><span>About</span></a></li>
+        <li><a href="./services.html"><i class="fa-solid fa-screwdriver-wrench"></i><span>Services</span></a></li>
+        <li><a href="./faq.html"><i class="fa-solid fa-circle-question"></i><span>FAQ</span></a></li>
+        <li><a href="./team.html"><i class="fa-solid fa-people-group"></i><span>Team</span></a></li>
+        <li><a href="index1.html"><i class="fa-solid fa-store"></i><span>Sale</span></a></li>
+      </div>
+    </div>
+  </nav>
+  <div id="nav-down" class="nav-down-2"></div>
+  <div id="nav-down" class="nav-down-1"></div>
+</div>
+
+<!-- Navbar -->
+<div id="top">
+  <a href="./index.html" id="top-image"><img src="./assets/image/Logo.jpg" id="top-rotate"><img src="./assets/image/WhatsApp Image 2024-11-21 at 00.52.34_48c44e4e - Copy.jpg"></a>
+  <div class="top-login">
+    <ul>
+      <li><a href="./login.html" id="login-btn">Login</a></li>
+      <li><a href="index.html" onclick="register()" id="register-btn">Register</a></li>
+      <li><a href="#" onclick="Logout()" id="logout-btn">Logout</a></li>
+    </ul>
+  </div>
+</div>
+<!-- Navbar -->
+
+<!-- FAQ Section -->
+<section id="faq">
+  <div class="faq-main">
+    <h1>Frequently Asked Questions</h1>
+    <hr class="line" />
+
+    <div class="faq-item">
+      <div class="faq-question">
+        <i class="fa-solid fa-circle-question fa-xl"></i>
+        What is E-waste?
+      </div>
+      <div class="faq-answer">
+        <i class="fa-solid fa-lightbulb fa-xl"></i>
+        E-waste refers to discarded electronic devices such as old computers, smartphones, tablets, and televisions.
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-question">
+        <i class="fa-solid fa-circle-question fa-xl"></i>
+        What is the proper way to dispose E-waste?
+      </div>
+      <div class="faq-answer">
+        <i class="fa-solid fa-lightbulb fa-xl"></i>
+        Take your e-waste to certified recycling centers or collection points to ensure safe and responsible disposal.
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-question">
+        <i class="fa-solid fa-circle-question fa-xl"></i>
+        How much time is taken to recycle E-waste?
+      </div>
+      <div class="faq-answer">
+        <i class="fa-solid fa-lightbulb fa-xl"></i>
+        Recycling time depends on the item type and facility but typically takes a few weeks for full processing.
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-question">
+        <i class="fa-solid fa-circle-question fa-xl"></i>
+        Which precious metals can be extracted from E-waste?
+      </div>
+      <div class="faq-answer">
+        <i class="fa-solid fa-lightbulb fa-xl"></i>
+        E-waste contains valuable metals like gold, silver, copper, and palladium that can be recovered.
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-question">
+        <i class="fa-solid fa-circle-question fa-xl"></i>
+        How much wealth can we generate from E-waste approximately?
+      </div>
+      <div class="faq-answer">
+        <i class="fa-solid fa-lightbulb fa-xl"></i>
+        Globally, e-waste recycling generates billions of dollars in recovered valuable materials each year.
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ✅ Chatbot (Bottom Left Corner) -->
+<div id="chatbot-container">
+  <button id="chatbot-toggle">💬</button>
+
+  <div id="chatbot-box">
+    <div id="chatbot-header">E-Renew Chatbot</div>
+    <div id="chatbot-messages"></div>
+    <div id="chatbot-input-area">
+      <input type="text" id="chatbot-input" placeholder="Ask me anything..." />
+      <button id="chatbot-send">Send</button>
+    </div>
+  </div>
+</div>
+
+<!-- Scripts -->
+<script src="./js/chatbot.js"></script>
+<script src="./js/script.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+<script type="module" src="./js/register.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,11 @@
+{
+  "name": "e-renew-frontend",
+  "version": "1.0.0",
+  "scripts": {
+    "dev": "serve public -l 5501",
+    "start": "serve public -l 5501"
+  },
+  "devDependencies": {
+    "serve": "^14.2.4"
+  }
+}
