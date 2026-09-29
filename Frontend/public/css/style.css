@@ -384,15 +384,36 @@ a {
 
 
 .hero-map-btn {
-  border: rgb(53, 53, 53) 0.1rem solid;
-  background: none;
+  border: none;
+  background: linear-gradient(135deg, #1ACC8D, #0fa36e);
+  color: #fff;
+  font-size: 1.05rem;
+  font-weight: 700;
+  letter-spacing: 0.3px;
+  box-shadow: 0 0 0 0 rgba(26, 204, 141, 0.5);
+  animation: pulseGlow 2s ease-in-out infinite;
+  position: relative;
+  cursor: pointer;
+}
+
+.hero-map-btn span::before {
+  content: "\1F4CD";
+  margin-right: 8px;
 }
 
 .hero-map-btn:hover {
   cursor: pointer;
-  background: #1ACC8D;
+  background: linear-gradient(135deg, #15b87e, #0d8f5f);
   color: white;
-  border: rgb(255, 255, 255);
+  transform: scale(1.05);
+  box-shadow: 0 4px 20px rgba(26, 204, 141, 0.4);
+  animation: none;
+}
+
+@keyframes pulseGlow {
+  0% { box-shadow: 0 0 0 0 rgba(26, 204, 141, 0.5); }
+  70% { box-shadow: 0 0 0 14px rgba(26, 204, 141, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(26, 204, 141, 0); }
 }
 
 @keyframes jumpInfinite {
